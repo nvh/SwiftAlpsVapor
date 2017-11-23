@@ -41,7 +41,9 @@ extension Droplet {
 
             let note = try req.note()
             try note.save()
-            return try note.makeJSON()
+            var json = JSON()
+            try json.set("data", note.makeJSON())
+            return json
         }
         
         try resource("posts", PostController.self)
