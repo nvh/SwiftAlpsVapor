@@ -25,6 +25,24 @@ extension Droplet {
         }
 
         get("description") { req in return req.description }
+
+
+        get("/api/v1/notes", ":id") { req in
+            guard let noteId = req.parameters["id"]?.int else {
+                throw Abort.badRequest
+            }
+            guard let note = try Note.find(noteId) else {
+                throw Abort.notFound
+            }
+            return try note.makeJSON()
+        }
+
+        post("/api/v1/notes") { req in
+
+            let note = try req.note()
+            try note.save()
+            return try note.makeJSON()
+        }
         
         try resource("posts", PostController.self)
     }
