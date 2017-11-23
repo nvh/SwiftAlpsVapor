@@ -8,16 +8,21 @@ extension Config {
 
         try setupProviders()
         try setupPreparations()
+        try setupMiddleware()
     }
-    
+
     /// Configure providers
     private func setupProviders() throws {
         try addProvider(FluentProvider.Provider.self)
     }
-    
+
     /// Add all models that should have their
     /// schemas prepared before the app boots
     private func setupPreparations() throws {
         preparations.append(Post.self)
+    }
+
+  private func setupMiddleware() throws {
+        try addConfigurable(middleware: VersionMiddleware(), name: "version")
     }
 }

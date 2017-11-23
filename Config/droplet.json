@@ -35,7 +35,7 @@
     "error: Catches errors thrown in your application and returns a nice response.",
   "//": "date: Adds the 'Date' header to HTTP requests.",
   "//": "file: Catches 404 errors and checks for files in the Public/ folder",
-  "middleware": ["error", "date", "file"],
+  "middleware": ["error", "date", "file", "version"],
 
   "//": "Choose which commands this application can run",
   "//":
